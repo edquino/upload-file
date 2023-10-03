@@ -1,0 +1,43 @@
+pipeline {
+    
+    agent any
+       
+    
+    options {
+        buildDiscarder logRotator( 
+                    daysToKeepStr: '16', 
+                    numToKeepStr: '10'
+            )
+    }
+    
+    stages{
+	/*
+        stage ('Prepare Scripts'){
+            steps {
+                sh 'chmod a+x ./scripts/*.sh'
+            }
+        }
+        
+        stage('Deploy Nexus'){
+            steps{
+                withCredentials([usernamePassword(credentialsId: 'nexus-credentials', usernameVariable: '$NEXUS_ADMIN_USER', passwordVariable: '$NEXUS_ADMIN_PASSWORD')]){
+                    sh './scripts/deployOnNexus.sh $WORKSPACE'
+                }
+            }
+        }
+	*/
+
+        stage('Merge Branch') {             
+            steps {                 
+                // Realiza aquí la operación de merge que necesitas                 
+                // Por ejemplo, si estás utilizando Git, podrías hacer algo como esto:                 
+                sh 'git --version'
+                // sh 'git checkout master'                 
+                // sh 'git merge feature-branch'                 
+                // sh 'git push origin master'             
+            }         
+        }
+                    
+    }
+    
+}
